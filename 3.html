@@ -108,6 +108,14 @@
   outline: none;
   box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }
+.link {
+        display: block;
+        margin-top: 1rem;
+        text-align: center;
+        color: #fff;
+        text-decoration: underline;
+        padding: 0.75rem;
+    }
   </style>
 </head>
 <body>
@@ -129,7 +137,7 @@
   <div class="dice-section">
     <button id="result" onclick="checkAnswers()">Check Answers</button>
   </div>
-  <a class="button" href="index.html">Click to go back, and roll again</a>
+  <a class="link" href="index.html">Click to go back, and roll again</a>
   <script>
       // ===== Audio Autoplay Logic WITH HIGHER VOLUME =====
   const audio = document.getElementById('background-audio');
