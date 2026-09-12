@@ -99,7 +99,7 @@
 </head>
 <body>
   <img class="image" src="main.png">
-  <button class="music-button">Click</button>
+  <button onclick="replayAudio()" class="music-button">Click</button>
   <h1>Click on the button above, wait for the song to end, then take your chance and roll, but don't worry, you won't Farkle...</h1>
   <audio id="background-audio" loop>
     <source src="onJoin.mp3" type="audio/mpeg">
@@ -138,7 +138,11 @@
     });
 
     setTimeout(playAudio, 1000);
-
+    function replayAudio() {
+      audio.currentTime = 0;   // rewind to start
+      audio.volume = 1.0;
+      audio.play().catch(()=>{});
+}   
 // ===== Dice Roll =====
   // 1. Define the images associated with numbers 1-6
 const images = ["1.png", "2.png", "3.png", "4.png", "5.png", "6.png"];

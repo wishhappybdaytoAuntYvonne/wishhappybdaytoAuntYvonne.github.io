@@ -111,8 +111,8 @@
   </style>
 </head>
 <body>
-  <button class="music-button">Click</button>
-  <audio id="background-audio" loop>
+    <button onclick="replayAudio()" class="music-button">Click</button>
+<audio id="background-audio" loop>
     <source src="wheel-of-fortune.mp3" type="audio/mpeg">
   </audio>
   <div class="dice-section">
@@ -148,7 +148,11 @@
     });
 
     setTimeout(playAudio, 1000);
-
+    function replayAudio() {
+      audio.currentTime = 0;   // rewind to start
+      audio.volume = 1.0;
+      audio.play().catch(()=>{});
+}   
     
     function checkAnswers() {
     var answers = ["jack", "friday", "board", "berry", "beard", "tie", "mail"];
