@@ -108,17 +108,16 @@
   </style>
 </head>
 <body>
-    <button onclick="replayAudio()" class="music-button">Click (if audio doesn't play)</button>
     <audio id="background-audio" loop>
     <source src="FOOL.mp3" type="audio/mpeg">
   </audio>
   <div class="dice-section">
     <h1 class="caution2"><strong class="caution">Caution:</strong> May contain recordings of the Andersons making a fool of themselves (E.g Samaya and her Beluga Whale)<h1>
     <img src="Denmark-xl.gif">
+    <button onclick="replayAudio()" class="music-button">Click to play</button>
     <h2 class="danish"><strong class="danish2">Tillykke med fødselsdagen</strong>, Aunt Yvonne!<h2>
   </div>
   <a class="button" href="index.html">Click to go back, and roll again</a>
-  <button onclick="replayAudio()" class="music-button">Click to replay</button>
   <script>
       // ===== Audio Autoplay Logic WITH HIGHER VOLUME =====
   const audio = document.getElementById('background-audio');
