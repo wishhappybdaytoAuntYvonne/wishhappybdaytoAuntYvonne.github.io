@@ -37,15 +37,15 @@
     }
     input[type="text"]:focus { border-color: #4a90d9; outline: none; }
     button {
-      width: 100%;
-      padding: 0.75rem;
-      font-size: 1rem;
-      background: #4a90d9;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
+        width: 100%;
+        padding: 0.75rem;
+        font-size: 1rem;
+        background: #4a90d9;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+      }
     button:hover { background: #357abd; }
     .result {
       margin-top: 1rem;
@@ -69,7 +69,7 @@
       cursor: pointer;
     }
     .farkled-text {
-      color: #0e3d3d;
+      color: #449c9c;
       font-weight: 1000;
     }
     .dice-section {
@@ -89,37 +89,36 @@
       margin-top: 2rem;
       margin-bottom: 2rem;
     }
-    .image {
-        border-radius: 20px;
-        width: 50%;
-        display: grid;
-        box-shadow: 5px 5px 10px 2px rgb(0 0 0 / 0.8);
+    .caution {
+      color: #d6b80a;
+      font-weight: 1000;
+    }
+    .caution2 {
+      color: #d66d0a;
+      font-weight: 1000;
+    }
+    .danish {
+        color: #000000;
+        font-weight: 1000;
+    }
+    .danish2 {
+        color: #1d1e1f;
+        font-weight: 1000;
     }
   </style>
 </head>
 <body>
-  <img class="image" src="main.png">
   <button class="music-button">Click</button>
-  <h1>Click on the button above, wait for the song to end, then take your chance and roll, but don't worry, you won't Farkle...</h1>
   <audio id="background-audio" loop>
-    <source src="onJoin.mp3" type="audio/mpeg">
+    <source src="FOOL.mp3" type="audio/mpeg">
   </audio>
-  <br>
-  <br>
   <div class="dice-section">
-    <h1><h1>
-    <button class="roll-the-dice" onclick="diceRoll()">Roll the dice</button>
-    <div class="result">
-      <video id="diceVideo" style="display:none; max-width:100%; margin:0 auto;" muted playsinline>
-        <source src="dice-roll.mp4" type="video/mp4">
-      </video>
-      <a id="imageLink" href="#" style="display:block; text-align:center;">
-        <img id="myImage" src="" alt="Dice result" style="display:none;">
-      </a>
-      <p id="result" style="text-align:center; margin-top:0.5rem; font-size:0.9rem; word-break:break-all;"></p>
-    </div>   
+    <h1 class="caution2"><strong class="caution">Caution:</strong> May contain recordings of the Andersons making a fool of themselves (E.g Samaya and her Beluga Whale)<h1>
+    <img src="Denmark-xl.gif">
+    <h2 class="danish"><strong class="danish2">Tillykke med fødselsdagen</strong>, Aunt Yvonne!<h2>
   </div>
-
+  <a class="button" href="index.html">Click to go back, and roll again</a>
+  <button onclick="replayAudio()" class="music-button">Click to replay</button>
   <script>
       // ===== Audio Autoplay Logic WITH HIGHER VOLUME =====
   const audio = document.getElementById('background-audio');
@@ -139,42 +138,11 @@
 
     setTimeout(playAudio, 1000);
 
-// ===== Dice Roll =====
-  // 1. Define the images associated with numbers 1-6
-const images = ["1.png", "2.png", "3.png", "4.png", "5.png", "6.png"];
-const links = [
-  "1.html",
-  "2.html",
-  "3.html",
-  "4.html",
-  "5.html",
-  "6.html"
-];
-
-function diceRoll() {
-  const video = document.getElementById("diceVideo");
-  const img = document.getElementById("myImage");
-  const link = document.getElementById("imageLink");
-  const result = document.getElementById("result");
-
-  img.style.display = "none";
-  result.textContent = "";
-
-  video.style.display = "block";
-  video.currentTime = 0;
-  video.play();
-
-  video.onended = () => {
-    video.style.display = "none";
-
-    const randomNum = Math.floor(Math.random() * images.length);
-
-    img.src = images[randomNum];
-    link.href = links[randomNum];
-    img.style.display = "block";
-    result.textContent = links[randomNum];
-  };
-}    
+    function replayAudio() {
+        audio.currentTime = 0;   // rewind to start
+        audio.volume = 1.0;
+        audio.play().catch(()=>{});
+    }   
   </script>
 </body>
 </html>   

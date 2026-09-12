@@ -69,7 +69,7 @@
       cursor: pointer;
     }
     .farkled-text {
-      color: #0e3d3d;
+      color: #449c9c;
       font-weight: 1000;
     }
     .dice-section {
@@ -83,98 +83,48 @@
       transform-style: preserve-3d;
       perspective: 1000px;
     }
-
     .music-button {
       max-width: 200px;
       margin-top: 2rem;
       margin-bottom: 2rem;
     }
-    .image {
-        border-radius: 20px;
-        width: 50%;
-        display: grid;
-        box-shadow: 5px 5px 10px 2px rgb(0 0 0 / 0.8);
-    }
   </style>
 </head>
 <body>
-  <img class="image" src="main.png">
   <button class="music-button">Click</button>
-  <h1>Click on the button above, wait for the song to end, then take your chance and roll, but don't worry, you won't Farkle...</h1>
   <audio id="background-audio" loop>
-    <source src="onJoin.mp3" type="audio/mpeg">
+    <source src="blessings.mp3" type="audio/mpeg">
   </audio>
-  <br>
-  <br>
   <div class="dice-section">
-    <h1><h1>
-    <button class="roll-the-dice" onclick="diceRoll()">Roll the dice</button>
-    <div class="result">
-      <video id="diceVideo" style="display:none; max-width:100%; margin:0 auto;" muted playsinline>
-        <source src="dice-roll.mp4" type="video/mp4">
-      </video>
-      <a id="imageLink" href="#" style="display:block; text-align:center;">
-        <img id="myImage" src="" alt="Dice result" style="display:none;">
-      </a>
-      <p id="result" style="text-align:center; margin-top:0.5rem; font-size:0.9rem; word-break:break-all;"></p>
-    </div>   
+    <h1>Birthday Blessings - A family tradition<h1>
+    <button class="roll-the-dice" onclick="blessings()">Hear your Birthday Blessings</button>
   </div>
-
+  <img class="image" src="6.jpeg">
+  <a class="button" href="index.html">Click to go back, and roll again</a>
   <script>
-      // ===== Audio Autoplay Logic WITH HIGHER VOLUME =====
-  const audio = document.getElementById('background-audio');
-  audio.volume = 1.0;
+    // ===== Audio Autoplay Logic WITH HIGHER VOLUME =====
+const audio = document.getElementById('background-audio');
+audio.volume = 1.0;
 
-    let played = false;
-    function playAudio() {
-      if (!played) {
-        audio.volume = 1.0; 
-        audio.play().catch(()=>{});
-        played = true;
-      }
+  let played = false;
+  function playAudio() {
+    if (!played) {
+      audio.volume = 1.0; 
+      audio.play().catch(()=>{});
+      played = true;
     }
-    ['click', 'keydown', 'touchstart'].forEach(evt => {
-      window.addEventListener(evt, playAudio, {once: true});
-    });
+  }
+  ['click', 'keydown', 'touchstart'].forEach(evt => {
+    window.addEventListener(evt, playAudio, {once: true});
+  });
 
-    setTimeout(playAudio, 1000);
-
-// ===== Dice Roll =====
-  // 1. Define the images associated with numbers 1-6
-const images = ["1.png", "2.png", "3.png", "4.png", "5.png", "6.png"];
-const links = [
-  "1.html",
-  "2.html",
-  "3.html",
-  "4.html",
-  "5.html",
-  "6.html"
-];
-
-function diceRoll() {
-  const video = document.getElementById("diceVideo");
-  const img = document.getElementById("myImage");
-  const link = document.getElementById("imageLink");
-  const result = document.getElementById("result");
-
-  img.style.display = "none";
-  result.textContent = "";
-
-  video.style.display = "block";
-  video.currentTime = 0;
-  video.play();
-
-  video.onended = () => {
-    video.style.display = "none";
-
-    const randomNum = Math.floor(Math.random() * images.length);
-
-    img.src = images[randomNum];
-    link.href = links[randomNum];
-    img.style.display = "block";
-    result.textContent = links[randomNum];
-  };
-}    
-  </script>
+  setTimeout(playAudio, 1000);
+  
+  function replayAudio() {
+      audio.currentTime = 0;   // rewind to start
+      audio.volume = 1.0;
+      audio.play().catch(()=>{});
+}   
+</script>
 </body>
 </html>   

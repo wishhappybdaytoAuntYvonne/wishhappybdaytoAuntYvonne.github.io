@@ -69,7 +69,7 @@
       cursor: pointer;
     }
     .farkled-text {
-      color: #0e3d3d;
+      color: #449c9c;
       font-weight: 1000;
     }
     .dice-section {
@@ -89,37 +89,47 @@
       margin-top: 2rem;
       margin-bottom: 2rem;
     }
-    .image {
-        border-radius: 20px;
-        width: 50%;
-        display: grid;
-        box-shadow: 5px 5px 10px 2px rgb(0 0 0 / 0.8);
-    }
+    .fill-blank {
+  /* Remove default box styling */
+  border: none;
+  border-bottom: 2px solid #333; /* The "blank" line */
+  background: transparent;
+  
+  /* Layout and sizing */
+  width: 150px; /* Adjust width as needed */
+  padding: 5px 0;
+  margin: 0 5px;
+  
+  /* Typography */
+  font: inherit; /* Inherit font from surrounding text */
+  color: #000;
+  
+  /* Focus state for accessibility */
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
   </style>
 </head>
 <body>
-  <img class="image" src="main.png">
   <button class="music-button">Click</button>
-  <h1>Click on the button above, wait for the song to end, then take your chance and roll, but don't worry, you won't Farkle...</h1>
   <audio id="background-audio" loop>
-    <source src="onJoin.mp3" type="audio/mpeg">
+    <source src="wheel-of-fortune.mp3" type="audio/mpeg">
   </audio>
-  <br>
-  <br>
   <div class="dice-section">
-    <h1><h1>
-    <button class="roll-the-dice" onclick="diceRoll()">Roll the dice</button>
-    <div class="result">
-      <video id="diceVideo" style="display:none; max-width:100%; margin:0 auto;" muted playsinline>
-        <source src="dice-roll.mp4" type="video/mp4">
-      </video>
-      <a id="imageLink" href="#" style="display:block; text-align:center;">
-        <img id="myImage" src="" alt="Dice result" style="display:none;">
-      </a>
-      <p id="result" style="text-align:center; margin-top:0.5rem; font-size:0.9rem; word-break:break-all;"></p>
-    </div>   
-  </div>
+    <h1>Brush off the cobwebs and finish these 'black' words.<h1>
+    <h3 class="farkled-text">Your favourite game is black</h3><input class="fill-blank" type="text" id="1" placeholder="Fill in the blank">
+    <h3 class="farkled-text">Your favourite place to shop is black</h3><input class="fill-blank" type="text" id="2" placeholder="Fill in the blank">
+    <h3 class="farkled-text">Your teacher used a black</h3><input class="fill-blank" type="text" id="3" placeholder="Fill in the blank">
+    <h3 class="farkled-text">Juicy and sweet: black</h3><input class="fill-blank" type="text" id="4" placeholder="Fill in the blank">
+    <h3 class="farkled-text">You probably heard of black</h3><input class="fill-blank" type="text" id="5" placeholder="Fill in the blank">
+    <h3 class="farkled-text">You have dressed for this type of event: a black</h3><input class="fill-blank" type="text" id="6" placeholder="Fill in the blank">
+    <h3 class="farkled-text">Not the post you would want to recieve</h3><input class="fill-blank" type="text" id="7" placeholder="Fill in the blank">
 
+</div>
+  <div class="dice-section">
+    <button id="result" onclick="checkAnswers()">Check Answers</button>
+  </div>
+  <a class="button" href="index.html">Click to go back, and roll again</a>
   <script>
       // ===== Audio Autoplay Logic WITH HIGHER VOLUME =====
   const audio = document.getElementById('background-audio');
@@ -139,42 +149,27 @@
 
     setTimeout(playAudio, 1000);
 
-// ===== Dice Roll =====
-  // 1. Define the images associated with numbers 1-6
-const images = ["1.png", "2.png", "3.png", "4.png", "5.png", "6.png"];
-const links = [
-  "1.html",
-  "2.html",
-  "3.html",
-  "4.html",
-  "5.html",
-  "6.html"
-];
+    
+    function checkAnswers() {
+    var answers = ["jack", "friday", "board", "berry", "beard", "tie", "mail"];
+    var correct = 0;
 
-function diceRoll() {
-  const video = document.getElementById("diceVideo");
-  const img = document.getElementById("myImage");
-  const link = document.getElementById("imageLink");
-  const result = document.getElementById("result");
+    for (var i = 1; i <= 7; i++) {
+        var input = document.getElementById(i).value;
+        if (input.toLowerCase() === answers[i - 1]) {
+            document.getElementById(i).style.border = "4px solid green";
+            correct++;
+        } else {
+            document.getElementById(i).style.border = "4px solid red";
+        }
+    }
 
-  img.style.display = "none";
-  result.textContent = "";
-
-  video.style.display = "block";
-  video.currentTime = 0;
-  video.play();
-
-  video.onended = () => {
-    video.style.display = "none";
-
-    const randomNum = Math.floor(Math.random() * images.length);
-
-    img.src = images[randomNum];
-    link.href = links[randomNum];
-    img.style.display = "block";
-    result.textContent = links[randomNum];
-  };
-}    
+    if (correct === 7) {
+        document.getElementById("result").textContent = "All correct!";
+    } else {
+        document.getElementById("result").textContent = correct + "/7 correct. Try again.";
+    }
+    }   
   </script>
 </body>
 </html>   
